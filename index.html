@@ -692,7 +692,7 @@ function match(it,noTipo){
   if(F.q){const w=norm(F.q).split(/\s+/).filter(Boolean);if(!w.every(x=>it.txt.includes(x)))return false}
   return true;
 }
-function filtered(){return ITEMS.filter(i=>match(i,TAB==="maqueta"))}
+function filtered(){const nt=TAB==="maqueta"||TAB==="mapa";return ITEMS.filter(i=>match(i,nt))}
 
 /* ---------- KPIs ---------- */
 (function(){
@@ -708,7 +708,7 @@ function showTab(t,noHash){
   document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
   document.querySelectorAll("section[role=tabpanel]").forEach(s=>s.hidden=s.id!==t);
   $("#fbar").hidden=!["mapa","maqueta","estructura"].includes(t);
-  $("#fTipo").hidden=t==="maqueta";
+  $("#fTipo").hidden=t==="maqueta"||t==="mapa";
   render();
   if(t==="mapa"&&M2)setTimeout(()=>M2.resize(),30);
   if(t==="maqueta"&&M3)setTimeout(()=>M3.resize(),30);
